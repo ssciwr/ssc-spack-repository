@@ -25,13 +25,8 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Check out the latest version of Spack
-      uses: actions/checkout@v2
-      with:
-        repository: 'spack/spack'
-        ref: 'v$SPACK_VERSION'
-
-    - name: Source the Spack setup script
       run: |
+        git clone -b v$SPACK_VERSION https://github.com/spack/spack.git
         source spack/share/spack/setup-env.sh
 
     - name: Concretizing contained packages
