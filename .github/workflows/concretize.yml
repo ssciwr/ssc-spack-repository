@@ -28,9 +28,11 @@ jobs:
       run: |
         git clone -b v$SPACK_VERSION https://github.com/spack/spack.git
         source spack/share/spack/setup-env.sh
+        spack repo add ssc-spack-repository
 
     - name: Concretizing contained packages
       run: |
+        source spack/share/spack/setup-env.sh
         spack spec arpackpp
         spack spec dune
         spack spec dune-randomfield
