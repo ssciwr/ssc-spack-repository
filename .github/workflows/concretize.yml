@@ -1,0 +1,42 @@
+name: concretization-check
+
+on:
+  # We run CI on pushes to the main branch
+  push:
+    branches:
+      - main
+  # as well as one pushes to PRs targeting the main branch
+  pull_request:
+    branches:
+      - main
+  # as well as upon manual triggers through the 'Actions' tab of the Github UI
+  workflow_dispatch:
+
+env:
+  SPACK_VERSION: 0.16.1
+
+jobs:
+  concretization-check:
+    name: Testing Package Spec Concretization
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checking out the repository
+      uses: actions/checkout@v2
+
+    - name: Check out the latest version of Spack
+      uses: actions/checkout@v2
+      with:
+        repository: 'https://github.com/spack/spack.git'
+        ref: 'v$SPACK_VERSION'
+
+    - name: Source the Spack setup script
+      run: |
+        source spack/share/spack/setup-env.sh
+
+    - name: Concretizing contained packages
+      run: |
+        spack spec arpackpp
+        spack spec dune
+        spack spec dune-randomfield
+        spack spec funcep

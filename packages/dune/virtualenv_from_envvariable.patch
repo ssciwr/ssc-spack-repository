@@ -1,0 +1,30 @@
+diff --git a/cmake/modules/DunePythonCommonMacros.cmake b/cmake/modules/DunePythonCommonMacros.cmake
+index 6f8ff307..93ea3e9c 100644
+--- a/cmake/modules/DunePythonCommonMacros.cmake
++++ b/cmake/modules/DunePythonCommonMacros.cmake
+@@ -149,6 +149,10 @@ function(dune_python_require_virtualenv_setup)
+   endif()
+ endfunction()
+ 
++if (NOT "$ENV{DUNE_PYTHON_VIRTUALENV_PATH}" STREQUAL "")
++  set(DUNE_PYTHON_VIRTUALENV_SETUP 1)
++endif()
++
+ # If requested, switch into DunePythonVirtualenv.cmake and setup the virtualenv.
+ if(DUNE_PYTHON_VIRTUALENV_SETUP)
+   include(DunePythonVirtualenv)
+diff --git a/cmake/modules/DunePythonVirtualenv.cmake b/cmake/modules/DunePythonVirtualenv.cmake
+index 8a09676f..96cb5954 100644
+--- a/cmake/modules/DunePythonVirtualenv.cmake
++++ b/cmake/modules/DunePythonVirtualenv.cmake
+@@ -81,6 +81,10 @@ set(DUNE_PYTHON_EXTERNAL_VIRTUALENV_FOR_ABSOLUTE_BUILDDIR ON CACHE BOOL
+   "Place Python virtualenv in top-level directory \"dune-python-env\" when using an absolute build directory"
+   )
+ 
++if (NOT "$ENV{DUNE_PYTHON_VIRTUALENV_PATH}" STREQUAL "")
++  set(DUNE_PYTHON_VIRTUALENV_PATH "$ENV{DUNE_PYTHON_VIRTUALENV_PATH}")
++endif()
++
+ if(DUNE_PYTHON_VIRTUALENV_PATH STREQUAL "")
+   foreach(mod ${ALL_DEPENDENCIES})
+     if(IS_DIRECTORY ${${mod}_DIR}/dune-env)

@@ -1,0 +1,30 @@
+diff --git a/cmake/modules/CMakeLists.txt b/cmake/modules/CMakeLists.txt
+index e28558a..219852b 100644
+--- a/cmake/modules/CMakeLists.txt
++++ b/cmake/modules/CMakeLists.txt
+@@ -1,3 +1,7 @@
+-set(modules "DuneRandomfieldMacros.cmake")
++set(modules
++  "DuneRandomfieldMacros.cmake"
++  "AddFFTW3Flags.cmake"
++  "AddHDF5Flags.cmake"
++  "FindFFTW3.cmake")
+ 
+ install(FILES ${modules} DESTINATION ${DUNE_INSTALL_MODULEDIR})
+diff --git a/dune/randomfield/CMakeLists.txt b/dune/randomfield/CMakeLists.txt
+index 82fee19..26a9eeb 100644
+--- a/dune/randomfield/CMakeLists.txt
++++ b/dune/randomfield/CMakeLists.txt
+@@ -1,7 +1,11 @@
+ #install headers
+-install(FILES fieldtraits.hh
++install(FILES covariance.hh
++              fieldtraits.hh
+               io.hh
++              legacyvtk.hh
+               matrix.hh
++              mutators.hh
++              pngreader.hh
+               randomfield.hh
+               stochastic.hh
+               trend.hh

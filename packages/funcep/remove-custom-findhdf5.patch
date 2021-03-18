@@ -1,0 +1,75 @@
+From ba4ed655fcedb8178c430ff4420eaf04e14580c0 Mon Sep 17 00:00:00 2001
+From: Dominic Kempf <dominic.kempf@iwr.uni-heidelberg.de>
+Date: Thu, 18 Mar 2021 10:11:12 +0100
+Subject: [PATCH] Change
+
+---
+ cmake/modules/CMakeLists.txt |  2 +-
+ cmake/modules/FindHDF5.cmake | 43 ------------------------------------
+ 2 files changed, 1 insertion(+), 44 deletions(-)
+ delete mode 100644 cmake/modules/FindHDF5.cmake
+
+diff --git a/cmake/modules/CMakeLists.txt b/cmake/modules/CMakeLists.txt
+index 1f392ba..3d32f66 100644
+--- a/cmake/modules/CMakeLists.txt
++++ b/cmake/modules/CMakeLists.txt
+@@ -3,6 +3,6 @@ set(modules
+   AddHDF5Flags.cmake
+   DuneFuncepMacros.cmake
+   FindFFTW3.cmake
+-  FindHDF5.cmake)
++)
+ 
+ install(FILES ${modules} DESTINATION ${DUNE_INSTALL_MODULEDIR})
+diff --git a/cmake/modules/FindHDF5.cmake b/cmake/modules/FindHDF5.cmake
+deleted file mode 100644
+index 1c0743a..0000000
+--- a/cmake/modules/FindHDF5.cmake
++++ /dev/null
+@@ -1,43 +0,0 @@
+-if (HDF5_ROOT)
+-    # force re-find programs
+-    set(HDF5_LIBRARY NOTFOUND CACHE FILE "hdf5 library, version 1.8.x" FORCE)
+-    set(HDF5_HL_LIBRARY NOTFOUND CACHE FILE "hdf5_hl library, version 1.8.x" FORCE)
+-    set(HDF5_INCLUDE_DIR NOTFOUND CACHE PATH "path to HDF5 version 1.8.x public headers" FORCE)
+-endif (HDF5_ROOT)
+-
+-find_library(HDF5_LIBRARY hdf5 HINTS ${HDF5_ROOT} PATH_SUFFIXES "lib" DOC "hdf5 library, version 1.8.x")
+-find_library(HDF5_HL_LIBRARY hdf5_hl HINTS ${HDF5_ROOT} PATH_SUFFIXES "lib" DOC "hdf5_hl library, version 1.8.x")
+-find_path(HDF5_INCLUDE_DIR H5PTpublic.h HINTS ${HDF5_ROOT} PATH_SUFFIXES "include" DOC "path to HDF5 version 1.8.x public headers")
+-
+-if (HDF5_INCLUDE_DIR)
+-   foreach(CHECK_INCLUDE_FILE H5Fpublic.h H5Tpublic.h H5Apublic.h H5LTpublic.h)
+-     find_file(HDF5_HAS_INCLUDE_${CHECK_INCLUDE_FILE} NAMES ${CHECK_INCLUDE_FILE} PATHS ${HDF5_INCLUDE_DIR} NO_DEFAULT_PATH)
+-     set(HDF5_HAS_INCLUDE_${CHECK_INCLUDE_FILE} ${HDF5_HAS_INCLUDE_${CHECK_INCLUDE_FILE}} CACHE INTERNAL "mydoc")
+-     if (NOT HDF5_HAS_INCLUDE_${CHECK_INCLUDE_FILE})
+-       if (NOT HDF5_FIND_QUIETLY)
+-           message(WARNING " cannot find HDF5 header ${CHECK_INCLUDE_FILE} in HDF5 include dir: ${HDF5_INCLUDE_DIR}")
+-       endif (NOT HDF5_FIND_QUIETLY)
+-       set(HDF5_INCLUDE_DIR NOTFOUND CACHE STRING "HDF5 include directory" FORCE)
+-       break()
+-     endif (NOT HDF5_HAS_INCLUDE_${CHECK_INCLUDE_FILE})
+-   endforeach(CHECK_INCLUDE_FILE)
+-endif (HDF5_INCLUDE_DIR)
+-
+-
+-if (HDF5_INCLUDE_DIR AND HDF5_LIBRARY AND HDF5_HL_LIBRARY)
+-   set(HDF5_FOUND TRUE)
+-endif (HDF5_INCLUDE_DIR AND HDF5_LIBRARY AND HDF5_HL_LIBRARY)
+-
+-if (HDF5_FOUND)
+-   if (NOT HDF5_FIND_QUIETLY)
+-      message(STATUS "Found HDF5 library: ${HDF5_LIBRARY}")
+-      # message(STATUS "Found HDF5 include dir: ${HDF5_INCLUDE_DIR}")
+-   endif (NOT HDF5_FIND_QUIETLY)
+-   dune_register_package_flags(COMPILE_DEFINITIONS "H5_USE_16_API"
+-                             LIBRARIES "${HDF5_LIBRARY}"
+-                             INCLUDE_DIRS "${HDF5_INCLUDE_DIR}")
+-else (HDF5_FOUND)
+-   if (HDF5_FIND_REQUIRED)
+-      message(WARNING "Could not find HDF5")
+-   endif (HDF5_FIND_REQUIRED)
+-endif (HDF5_FOUND)
+-- 
+2.25.1
+
