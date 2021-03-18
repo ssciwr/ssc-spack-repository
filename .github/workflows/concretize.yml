@@ -28,7 +28,7 @@ jobs:
       run: |
         git clone -b v$SPACK_VERSION https://github.com/spack/spack.git
         source spack/share/spack/setup-env.sh
-        spack repo add ssc-spack-repository
+        spack repo add .
 
     - name: Concretizing contained packages
       run: |
