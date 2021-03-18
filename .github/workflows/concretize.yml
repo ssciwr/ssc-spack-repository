@@ -27,7 +27,7 @@ jobs:
     - name: Check out the latest version of Spack
       uses: actions/checkout@v2
       with:
-        repository: 'https://github.com/spack/spack.git'
+        repository: 'spack/spack'
         ref: 'v$SPACK_VERSION'
 
     - name: Source the Spack setup script
