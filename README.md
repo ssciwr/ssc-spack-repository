@@ -44,10 +44,11 @@ all of its dependencies:
 ```
 git clone https://parcomp-git.iwr.uni-heidelberg.de/Teaching/dune-funcep.git
 cd dune-funcep
-spack dev-build funcep@master
+spack dev-build --jobs 1 funcep@master
 ```
 
-After doing so, a CMake build directory `spack-build-<hash>` will contain the built
+If your computer has a enough RAM, you can increase the number of concurrent build jobs.
+After installation, a CMake build directory `spack-build-<hash>` will contain the built
 course material.
 
 ## Troubleshooting
