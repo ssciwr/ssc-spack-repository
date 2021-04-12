@@ -4,7 +4,7 @@
 allows to build consistent scientific software stacks from source. Spack is the state of the
 art for system administrators in HPC centers but is also increasingly popular
 in end user scenarios. One particular strength of Spack is the handling of
-built variants of packages and their dependencies.
+build variants of packages and their dependencies.
 
 This repository defines some package recipes that are maintained
 by the Scientific Software Center of Heidelberg University.
