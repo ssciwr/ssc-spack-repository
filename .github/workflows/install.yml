@@ -1,0 +1,35 @@
+name: installation-check
+
+on:
+  # We run this once a month - it is quite resource-intense after all
+  schedule:
+    - cron: "0 0 1 * *"
+
+  # as well as upon manual triggers through the 'Actions' tab of the Github UI
+  workflow_dispatch:
+
+env:
+  SPACK_VERSION: 0.16.1
+
+jobs:
+  concretization-check:
+    name: Testing Package Spec Concretization
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checking out the repository
+      uses: actions/checkout@v2
+
+    - name: Check out the latest version of Spack
+      run: |
+        git clone -b v$SPACK_VERSION https://github.com/spack/spack.git
+        source spack/share/spack/setup-env.sh
+        spack repo add .
+
+    - name: Concretizing contained packages
+      run: |
+        source spack/share/spack/setup-env.sh
+        spack install arpackpp
+        spack install dune
+        spack install dune-randomfield
+        spack install funcep
