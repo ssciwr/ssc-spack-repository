@@ -29,7 +29,7 @@ jobs:
     - name: Concretizing contained packages
       run: |
         source spack/share/spack/setup-env.sh
-        spack install arpackpp
-        spack install dune
-        spack install dune-randomfield
-        spack install funcep
+        spack install --jobs 2 arpackpp
+        spack install --jobs 2 dune
+        spack install --jobs 2 dune-randomfield
+        spack install --jobs 2 funcep
