@@ -12,8 +12,8 @@ env:
   SPACK_VERSION: 0.16.1
 
 jobs:
-  concretization-check:
-    name: Testing Package Spec Concretization
+  installation-check:
+    name: Testing Package Installation
     runs-on: ubuntu-latest
 
     steps:
