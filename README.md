@@ -34,6 +34,29 @@ to your `~/.bashrc` file.
 
 ## Instructions for individual packages
 
+### DORiE
+
+DORiE is a DUNE module for solving the Richards equation, and optionally the passive transport equation for soil water flow.
+It has been developed in the Terrestial Systems research group at Heidelberg University.
+For more information you can consult [it's documentation](https://hermes.iup.uni-heidelberg.de/dorie_doc/master/html/) and [the source code](https://ts-gitlab.iup.uni-heidelberg.de/dorie/dorie).
+If you have set up Spack like described above, you can install DORiE with:
+
+```
+spack install dorie
+```
+
+After installation, the package can be loaded into the environment with:
+
+```
+spack load dorie
+```
+
+The main entrypoint for using DORiE is its command-line interface:
+
+```
+dorie --help
+```
+
 ### FunCEP
 
 This is the lecture material for the lecture *Fundamentals of Computational Environmental Physics*
