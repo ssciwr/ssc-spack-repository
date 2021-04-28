@@ -1,0 +1,25 @@
+From 188192d8b92db4011b8f74e76c7089c0f64b89a2 Mon Sep 17 00:00:00 2001
+From: Dominic Kempf <dominic.kempf@iwr.uni-heidelberg.de>
+Date: Wed, 28 Apr 2021 16:32:55 +0200
+Subject: [PATCH] Disable documentation
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c1b8b1bf..6ed1322b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -44,7 +44,7 @@ set(DORIE_EXE_PATH ${PROJECT_BINARY_DIR}/dune/dorie/
+ add_subdirectory("plugins/vendor")
+ add_subdirectory("cmake/modules")
+ add_subdirectory("python")
+-add_subdirectory("doc")
++#add_subdirectory("doc")
+ add_subdirectory("dune")
+ if(DORIE_TESTING)
+     add_subdirectory("test")
+-- 
+2.25.1
+

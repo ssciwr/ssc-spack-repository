@@ -37,3 +37,4 @@ jobs:
         spack spec dune
         spack spec dune-randomfield
         spack spec funcep
+        spack spec dorie
